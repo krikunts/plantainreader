@@ -1,0 +1,15 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="actionBarStyle">@style/greenActionBar</item>
+        <item name="android:actionBarStyle">@style/greenActionBar</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="greenActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/colorGreen</item>
+        <item name="background">@color/colorGreen</item>
+    </style>
+</resources>

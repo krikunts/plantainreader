@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="-1dp"
+    android:layout_height="-1dp"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_centerInParent="false"
+        android:orientation="vertical"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="0.05"
+            android:drawablePadding="16dp"
+            android:fontFamily="sans-serif"
+            android:gravity=""
+            android:text=""
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/balance_value"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif"
+            android:text=""
+            android:gravity="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/balance_text_size" />
+        <TextView
+            android:id="@+id/travel_count_value"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif"
+            android:gravity=""
+            android:text=""
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/last_travel_date_value"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif"
+            android:gravity=""
+            android:text=""
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size" />
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatButton
+                    android:backgroundTint="@color/colorGreenLighter"
+                    android:text="@string/read_again"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_again_button"
+                    android:visibility="invisible"
+                    android:onClick="readAgainClick"
+                     />
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

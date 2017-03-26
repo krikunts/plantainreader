@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size">27sp</dimen>
+    <dimen name="balance_text_size">100sp</dimen>
+</resources>

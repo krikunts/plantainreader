@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="actionBarStyle">@style/greenActionBar</item>
+        <item name="android:actionBarStyle">@style/greenActionBar</item>
+        <item name="android:statusBarColor">@color/colorGreenDarker</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

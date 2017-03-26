@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Plantain reader</string>
+    <string name="balance_label">Баланс:</string>
+    <string name="travel_count_label">Поездок на метро в этом месяце:</string>
+    <string name="read_again">Считать снова</string>
+    <string name="last_travel_date_label">Время последней поездки:</string>
+    <string name="compat_warning">Внимание: на вашем устройстве не обнаружена поддержка карт Mifare, приложение может работать некорректно</string>
+    <string name="nfc_disabled">NFC выключен или не поддерживается на устройстве</string>
+
+    <string name="status_wait">Приложите карту</string>
+    <string name="status_reading">Чтение...</string>
+    <string name="status_nfc_tag_found">Найден NFC-тег</string>
+    <string name="status_reading_sector_4">Чтение сектора №4...</string>
+    <string name="status_reading_sector_4_failed">Не могу прочитать сектор №4: ошибка ключей.</string>
+    <string name="status_reading_sector_5">Чтение сектора №5...</string>
+    <string name="status_reading_sector_5_failed">Не могу прочитать сектор №5: ошибка ключей.</string>
+    <string name="status_success">Данные успешно считаны</string>
+    <string name="status_connection_lost">Потеряно соединение с картой</string>
+    <string name="status_unhandled_error">Необработанная ошибка:</string>
+</resources>
