@@ -83,13 +83,7 @@ class Dump implements Serializable {
 
     public String getBalance() {
         byte[] block = sector4[0];
-        int value = DumpUtil.convertBytes(block[0], block[1]);
-        DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance();
-        formatter.setMaximumFractionDigits(0);
-        formatter.setCurrency(Currency.getInstance("RUR"));
-        formatter.setNegativePrefix(formatter.getCurrency().getSymbol() + "-");
-        formatter.setNegativeSuffix("");
-        return formatter.format(((double) value) / 100.0d);
+        return DumpUtil.getRubles(block[0], block[1]);
     }
 
     public String getSubwayTravelCount() {
@@ -111,6 +105,11 @@ class Dump implements Serializable {
         c.set(2010, 0, 1, 0, 0, 0);
         c.add(Calendar.MINUTE, timeDiff);
         return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(c.getTime());
+    }
+
+    public String getLastTravelCost() {
+        byte[] block = sector5[0];
+        return DumpUtil.getRubles(block[6], block[7]);
     }
 
     public String getLastValidator() {

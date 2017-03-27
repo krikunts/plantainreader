@@ -82,6 +82,8 @@ public class ReadingTagActivity extends AppCompatActivity {
             }
             readSector(tech, 5, dump.sector5);
             updateWidgetText(R.id.balance_value, dump.getBalance());
+            updateWidgetText(R.id.last_travel_cost,
+                             getString(R.string.last_travel_cost_label) + " " + dump.getLastTravelCost());
             final TextView travel_count_label = (TextView) findViewById(R.id.travel_count_label);
             travel_count_label.post(new Runnable() {
                 @Override
@@ -90,7 +92,7 @@ public class ReadingTagActivity extends AppCompatActivity {
                 }
             });
             updateWidgetText(R.id.travel_count_value, 
-                             getString(R.string.travel_subway) + " " + dump.getSubwayTravelCount() + ", " +
+                             getString(R.string.travel_subway) + " " + dump.getSubwayTravelCount() + ",\n" +
                              getString(R.string.travel_on_ground) + " " + dump.getOnGroundTravelCount());
             updateWidgetText(R.id.last_travel_date_value, getString(R.string.last_travel_date_label) +
                              " " + dump.getLastDate());

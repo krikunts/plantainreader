@@ -16,8 +16,6 @@
             android:id="@+id/status_text"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_weight="0.05"
-            android:drawablePadding="16dp"
             android:fontFamily="sans-serif"
             android:gravity=""
             android:text=""
@@ -32,6 +30,15 @@
             android:gravity="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/balance_text_size" />
+        <TextView
+            android:id="@+id/last_travel_cost"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif"
+            android:gravity=""
+            android:text=""
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size" />
         <TextView
             android:id="@+id/travel_count_label"
             android:layout_height="wrap_content"

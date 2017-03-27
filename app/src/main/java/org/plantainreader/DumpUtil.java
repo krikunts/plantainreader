@@ -2,6 +2,10 @@ package org.plantainreader;
 
 import android.util.Log;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Currency;
+
 public class DumpUtil {
     public static final String LOG = "DumpUtil";
 
@@ -23,5 +27,15 @@ public class DumpUtil {
             result.append(separator);
         }
         return result.substring(0, result.length() - separator.length());
+    }
+
+    public static String getRubles(byte... b) {
+        int value = DumpUtil.convertBytes(b);
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance();
+        formatter.setMaximumFractionDigits(0);
+        formatter.setCurrency(Currency.getInstance("RUR"));
+        formatter.setNegativePrefix(formatter.getCurrency().getSymbol() + "-");
+        formatter.setNegativeSuffix("");
+        return formatter.format(((double) value) / 100.0d);
     }
 }
