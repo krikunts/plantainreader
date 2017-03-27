@@ -92,9 +92,15 @@ class Dump implements Serializable {
         return formatter.format(((double) value) / 100.0d);
     }
 
-    public String getTravelCount() {
+    public String getSubwayTravelCount() {
         byte[] block = sector5[1];
         int travelCount = DumpUtil.convertBytes(block[0]);
+        return Integer.toString(travelCount);
+    }
+
+    public String getOnGroundTravelCount() {
+        byte[] block = sector5[1];
+        int travelCount = DumpUtil.convertBytes(block[1]);
         return Integer.toString(travelCount);
     }
 
