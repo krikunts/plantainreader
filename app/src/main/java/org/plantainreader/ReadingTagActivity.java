@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 public class ReadingTagActivity extends AppCompatActivity {
     public static final  String LOG = "ReadingTagActivity";
@@ -84,18 +85,21 @@ public class ReadingTagActivity extends AppCompatActivity {
             updateWidgetText(R.id.balance_value, dump.getBalance());
             updateWidgetText(R.id.last_travel_cost,
                              getString(R.string.last_travel_cost_label) + " " + dump.getLastTravelCost());
+            final Calendar lastTravelDate = dump.getLastDate();
             final TextView travel_count_label = (TextView) findViewById(R.id.travel_count_label);
             travel_count_label.post(new Runnable() {
                 @Override
                 public void run() {
                     travel_count_label.setVisibility(View.VISIBLE);
+                    travel_count_label.setText(getString(R.string.travel_count_label) + " " +
+                    DumpUtil.formatDateMY(lastTravelDate) + ":");
                 }
             });
             updateWidgetText(R.id.travel_count_value, 
                              getString(R.string.travel_subway) + " " + dump.getSubwayTravelCount() + ",\n" +
                              getString(R.string.travel_on_ground) + " " + dump.getOnGroundTravelCount());
             updateWidgetText(R.id.last_travel_date_value, getString(R.string.last_travel_date_label) +
-                             " " + dump.getLastDate());
+                             " " + DumpUtil.formatDateFull(lastTravelDate));
             updateWidgetText(R.id.status_text, getString(R.string.status_success));
             Log.i(LOG, "validator ID: " + dump.getLastValidator());
 

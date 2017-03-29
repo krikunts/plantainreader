@@ -11,12 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Currency;
-import java.util.TimeZone;
 
 class Dump implements Serializable {
     static final int SECTOR_SIZE = 4;
@@ -98,13 +93,9 @@ class Dump implements Serializable {
         return Integer.toString(travelCount);
     }
 
-    public String getLastDate() {
+    public Calendar getLastDate() {
         byte[] block = sector5[0];
-        int timeDiff = DumpUtil.convertBytes(block[0], block[1], block[2], block[3]);
-        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT+3"));
-        c.set(2010, 0, 1, 0, 0, 0);
-        c.add(Calendar.MINUTE, timeDiff);
-        return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(c.getTime());
+        return DumpUtil.getDate(block[0], block[1], block[2]);
     }
 
     public String getLastTravelCost() {
