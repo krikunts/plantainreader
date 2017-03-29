@@ -8,6 +8,8 @@
     <string name="read_again">Считать снова</string>
     <string name="last_travel_date_label">Время последней поездки:</string>
     <string name="last_travel_cost_label">Стоимость последней поездки:</string>
+    <string name="last_payment_date_label">Последний платеж:</string>
+    <string name="last_payment_value_label">на сумму</string>
     <string name="compat_warning">Внимание: на вашем устройстве не обнаружена поддержка карт Mifare, приложение может работать некорректно</string>
     <string name="nfc_disabled">NFC выключен или не поддерживается на устройстве</string>
 

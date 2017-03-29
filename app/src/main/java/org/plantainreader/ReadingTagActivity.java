@@ -100,6 +100,12 @@ public class ReadingTagActivity extends AppCompatActivity {
                              getString(R.string.travel_on_ground) + " " + dump.getOnGroundTravelCount());
             updateWidgetText(R.id.last_travel_date_value, getString(R.string.last_travel_date_label) +
                              " " + DumpUtil.formatDateFull(lastTravelDate));
+            Calendar lastPaymentDate = dump.getLastPaymentDate();
+            updateWidgetText(R.id.last_payment,
+                             getString(R.string.last_payment_date_label) + " " +
+                             DumpUtil.formatDateFull(lastPaymentDate) + " " +
+                             getString(R.string.last_payment_value_label) + " " +
+                             dump.getLastPaymentValue());
             updateWidgetText(R.id.status_text, getString(R.string.status_success));
             Log.i(LOG, "validator ID: " + dump.getLastValidator());
 

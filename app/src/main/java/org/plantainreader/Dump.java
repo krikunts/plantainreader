@@ -109,4 +109,15 @@ class Dump implements Serializable {
         return Integer.toString(validatorID);
     }
 
+    public Calendar getLastPaymentDate() {
+        byte[] block = sector4[2];
+        Calendar c = DumpUtil.getDate(block[2], block[3], block[4]);
+        return c;
+    }
+
+    public String getLastPaymentValue() {
+        byte[] block = sector4[2];
+        return DumpUtil.getRubles(block[8], block[9]);
+    }
+
 }

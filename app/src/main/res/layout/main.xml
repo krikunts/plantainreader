@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_centerInParent="false"
         android:orientation="vertical"
         android:weightSum="1">
@@ -43,7 +43,7 @@
             android:id="@+id/travel_count_label"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity=""
             android:text="@string/travel_count_label"
@@ -54,7 +54,7 @@
             android:id="@+id/travel_count_value"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
             android:gravity=""
             android:text=""
@@ -62,6 +62,15 @@
             android:textSize="@dimen/text_size" />
         <TextView
             android:id="@+id/last_travel_date_value"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif"
+            android:gravity=""
+            android:text=""
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/last_payment"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:fontFamily="sans-serif"
