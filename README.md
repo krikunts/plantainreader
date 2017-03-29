@@ -3,7 +3,7 @@
 
 Для использования необходим телефон с версией Android 4.2+ и NFC чипом от NXP ([список устройств](https://en.wikipedia.org/wiki/List_of_NFC-enabled_mobile_devices)).
 
-![screenshot](https://habrastorage.org/files/819/4d1/928/8194d19284164e91b75ee6684bc508c1.png)
+![screenshot](https://hsto.org/files/96a/43f/21f/96a43f21f4fe4ed9844d27a77fa743a9.png)
 
 #### Список проверенных устройств
 
