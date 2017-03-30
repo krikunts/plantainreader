@@ -3,13 +3,17 @@
 
 Для использования необходим телефон с версией Android 4.2+ и NFC чипом от NXP ([список устройств](https://en.wikipedia.org/wiki/List_of_NFC-enabled_mobile_devices)).
 
-![screenshot](https://hsto.org/files/96a/43f/21f/96a43f21f4fe4ed9844d27a77fa743a9.png)
+![screenshot](https://habrastorage.org/files/df3/de1/e59/df3de1e59c6a4398be91616354f9b4e5.png)
 
 #### Список проверенных устройств
 
 Работает:
-* Sony Xperia SP
+* HTC One e8 dual sim
+* LG G3
+* LG G5 H860
 * Nexus 5X
+* Sony Xperia SP
+* Sony Xperia Z3+
 
 Не работает:
 * Nexus 4
