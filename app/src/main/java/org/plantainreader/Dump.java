@@ -78,7 +78,7 @@ class Dump implements Serializable {
 
     public String getBalance() {
         byte[] block = sector4[0];
-        return DumpUtil.getRubles(block[0], block[1]);
+        return DumpUtil.getRubles(block[0], block[1], block[2], block[3]);
     }
 
     public String getSubwayTravelCount() {
@@ -117,7 +117,7 @@ class Dump implements Serializable {
 
     public String getLastPaymentValue() {
         byte[] block = sector4[2];
-        return DumpUtil.getRubles(block[8], block[9]);
+        return DumpUtil.getRubles(block[8], block[9], block[10]);
     }
 
 }
