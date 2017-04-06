@@ -12,6 +12,10 @@
     <string name="last_payment_value_label">на сумму</string>
     <string name="compat_warning">Внимание: на вашем устройстве не обнаружена поддержка карт Mifare, приложение может работать некорректно</string>
     <string name="nfc_disabled">NFC выключен или не поддерживается на устройстве</string>
+    <string name="nfc_dialog_title">Включить NFC</string>
+    <string name="nfc_dialog_message">NFC выключен. Перейти в настройки?</string>
+    <string name="nfc_dialog_yes">Перейти</string>
+    <string name="nfc_dialog_no">Выйти</string>
 
     <string name="status_wait">Приложите карту</string>
     <string name="status_reading">Чтение...</string>
