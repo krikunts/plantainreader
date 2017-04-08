@@ -8,10 +8,11 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private NfcAdapter mNfcAdapter;
     private PendingIntent mPendingIntent;
     private AlertDialog mEnableNfc;
@@ -19,7 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        String[] savedTags = getSavedTags();
+        Button readFileButton = (Button)findViewById(R.id.read_file_button);
+        if(savedTags.length == 0) {
+            readFileButton.setVisibility(View.INVISIBLE);
+        } else {
+            readFileButton.setVisibility(View.VISIBLE);
+        }
         this.mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         initAdapter();
     }

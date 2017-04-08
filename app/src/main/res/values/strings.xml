@@ -5,7 +5,9 @@
     <string name="travel_count_label">Поездок за</string>
     <string name="travel_subway">на метро:</string>
     <string name="travel_on_ground">на наземном транспорте:</string>
-    <string name="read_again">Считать снова</string>
+    <string name="read_again">Прочитать карту</string>
+    <string name="save_to_file">Сохранить дамп</string>
+    <string name="read_from_file">Прочитать дамп</string>
     <string name="last_travel_date_label">Время последней поездки:</string>
     <string name="last_travel_cost_label">Стоимость последней поездки:</string>
     <string name="last_payment_date_label">Последний платеж:</string>
@@ -27,4 +29,9 @@
     <string name="status_success">Данные успешно считаны</string>
     <string name="status_connection_lost">Потеряно соединение с картой</string>
     <string name="status_unhandled_error">Необработанная ошибка:</string>
+    <string name="status_file_write_error">Ошибка записи в файл</string>
+    <string name="status_file_write_ok">Дамп успешно сохранен</string>
+    <string name="status_file_read_error">Ошибка чтения из файла</string>
+    <string name="choose_tag_title">Выберите ID карты</string>
+    <string name="choose_dump_title">Выберите файл дампа</string>
 </resources>

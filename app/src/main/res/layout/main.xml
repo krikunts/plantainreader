@@ -90,7 +90,24 @@
                     android:id="@+id/read_again_button"
                     android:visibility="invisible"
                     android:onClick="readAgainClick"
-                     />
+                    />
+                <android.support.v7.widget.AppCompatButton
+                    android:backgroundTint="@color/colorGreenLighter"
+                    android:text="@string/save_to_file"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/save_button"
+                    android:visibility="invisible"
+                    android:onClick="saveToFileClick"
+                    />
+                <android.support.v7.widget.AppCompatButton
+                    android:backgroundTint="@color/colorGreenLighter"
+                    android:text="@string/read_from_file"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/read_file_button"
+                    android:onClick="readFromFileClick"
+                    />
             </LinearLayout>
     </LinearLayout>
 </LinearLayout>

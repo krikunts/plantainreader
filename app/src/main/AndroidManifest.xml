@@ -6,6 +6,8 @@
 
     <application android:theme="@style/AppTheme" android:label="@string/app_name" android:icon="@drawable/ic_launcher">
         <activity android:name=".ReadingTagActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" android:noHistory="true" />
+        <activity android:name=".ReadingFileActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" android:noHistory="true" />
+        <activity android:name=".DumpActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" android:noHistory="true" />
         <activity android:name=".CardInfoActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />

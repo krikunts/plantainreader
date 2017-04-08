@@ -1,123 +1,148 @@
 package org.plantainreader;
 
 import android.nfc.tech.MifareClassic;
-import android.util.Base64;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.SparseArray;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
-class Dump implements Serializable {
-    static final int SECTOR_SIZE = 4;
-    static final int BLOCK_SIZE = MifareClassic.BLOCK_SIZE;
-
+class Dump implements Parcelable{
     private String tagName;
+    private SparseArray<Sector> sectors;
+
+    private Dump(String tagName, Sector sector4, Sector sector5) {
+        this.tagName = tagName;
+        sectors = new SparseArray<>();
+        sectors.put(4, sector4);
+        sectors.put(5, sector5);
+    }
+
+    Dump(String tagName) {
+        this(tagName, new Sector(), new Sector());
+    }
+
+    Dump(Parcel p) {
+        this(p.readString());
+        deserialize(p.readString());
+    }
+
+    public static final Parcelable.Creator<Dump> CREATOR
+              = new Parcelable.Creator<Dump>() {
+          public Dump createFromParcel(Parcel in) {
+              return new Dump(in);
+          }
+          public Dump[] newArray(int size) {
+              return new Dump[size];
+          }
+      };
 
     String getTagName() {
         return tagName;
     }
 
-    byte[][] sector4;
-    byte[][] sector5;
-    byte[][] sector9;
-
-
-    Dump(byte[] tagName) {
-        this.tagName = Base64.encodeToString(tagName, Base64.URL_SAFE);
-        this.sector4 = new byte[SECTOR_SIZE][BLOCK_SIZE];
-        this.sector5 = new byte[SECTOR_SIZE][BLOCK_SIZE];
-        this.sector9 = new byte[SECTOR_SIZE][BLOCK_SIZE];
-    }
-
-    public Dump(byte[] tagName, byte[][] sector4, byte[][] sector5) {
-        this.tagName = Base64.encodeToString(tagName, Base64.URL_SAFE);
-        this.sector4 = sector4;
-        this.sector5 = sector5;
-    }
-
-    String serializeToString() throws IOException {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutput out = null;
-        try {
-            out = new ObjectOutputStream(bos);
-            out.writeObject(this);
-            out.flush();
-            byte[] result = bos.toByteArray();
-            return Base64.encodeToString(result, Base64.URL_SAFE);
-        } finally {
-            try {
-                bos.close();
-            } catch (IOException ignored) {
-            }
-        }
-    }
-
-    static Dump deserializeFromString(String input) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream bis = new ByteArrayInputStream(Base64.decode(input, Base64.URL_SAFE));
-        ObjectInput in = null;
-        try {
-            in = new ObjectInputStream(bis);
-            Object o = in.readObject();
-            return (Dump) o;
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                // ignore close exception
-            }
-        }
+    public Sector sector(int sector) {
+        return sectors.get(sector);
     }
 
     public String getBalance() {
-        byte[] block = sector4[0];
-        return DumpUtil.getRubles(block[0], block[1], block[2], block[3]);
+        // sector 4, block 0, bytes 0, 1, 2, 3
+        return DumpUtil.getRubles(sector(4).bytes(0, 0, 4));
     }
 
     public String getSubwayTravelCount() {
-        byte[] block = sector5[1];
-        int travelCount = DumpUtil.convertBytes(block[0]);
+        // sector 5, block 1, byte 0
+        int travelCount = DumpUtil.convertBytes(sector(5).bytes(1, 0, 1));
         return Integer.toString(travelCount);
     }
 
     public String getOnGroundTravelCount() {
-        byte[] block = sector5[1];
-        int travelCount = DumpUtil.convertBytes(block[1]);
+        // sector 5, block 1, byte 1
+        int travelCount = DumpUtil.convertBytes(sector(5).bytes(1, 1, 1));
         return Integer.toString(travelCount);
     }
 
     public Calendar getLastDate() {
-        byte[] block = sector5[0];
-        return DumpUtil.getDate(block[0], block[1], block[2]);
+        // sector 5, block 0, bytes 0, 1, 2
+        return DumpUtil.getDate(sector(5).bytes(0, 0, 3));
     }
 
     public String getLastTravelCost() {
-        byte[] block = sector5[0];
-        return DumpUtil.getRubles(block[6], block[7]);
+        // sector 5, block 0, bytes 6, 7
+        return DumpUtil.getRubles(sector(5).bytes(0, 6, 2));
     }
 
     public String getLastValidator() {
-        byte[] block = sector5[0];
-        int validatorID = DumpUtil.convertBytes(block[4], block[5]);
+        // sector 5, block 0, bytes 4, 5
+        int validatorID = DumpUtil.convertBytes(sector(5).bytes(0, 4, 2));
         return Integer.toString(validatorID);
     }
 
     public Calendar getLastPaymentDate() {
-        byte[] block = sector4[2];
-        Calendar c = DumpUtil.getDate(block[2], block[3], block[4]);
+        // sector 4, block 2, bytes 2, 3, 4
+        Calendar c = DumpUtil.getDate(sector(4).bytes(2, 2, 3));
         return c;
     }
 
     public String getLastPaymentValue() {
-        byte[] block = sector4[2];
-        return DumpUtil.getRubles(block[8], block[9], block[10]);
+        // sector 4, block 2, bytes 8, 9, 10
+        return DumpUtil.getRubles(sector(4).bytes(2, 8, 3));
     }
 
+    public void readSector(MifareClassic tech, int sectorId) throws IOException {
+        Sector sector = this.sector(sectorId);
+        int block = tech.sectorToBlock(sectorId);
+        sector.read(tech, block);
+    }
+
+    public String serialize() {
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < sectors.size(); i++){
+            int n = sectors.keyAt(i);
+            Sector s = sectors.get(n);
+            sb.append("+Sector: ");
+            sb.append(n);
+            sb.append("\n");
+            sb.append(s.serialize());
+        }
+        return sb.toString();
+    }
+
+    public void deserialize(String s) {
+        Pattern sectorStart = Pattern.compile("\\+Sector:");
+        Scanner scanner = new Scanner(s);
+        while(scanner.hasNextLine()){
+            if(scanner.hasNext(sectorStart)) {
+                scanner.skip(sectorStart);
+                int n = scanner.nextInt();
+                scanner.skip("\n");
+                StringBuilder sectorData = new StringBuilder();
+                while(scanner.hasNextLine() && !scanner.hasNext(sectorStart)){
+                    sectorData.append(scanner.nextLine());
+                    sectorData.append("\n");
+                }
+                Sector sector = new Sector();
+                sector.deserialize(sectorData.toString());
+                sectors.put(n, sector);
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.tagName);
+        dest.writeString(this.serialize());
+    }
 }

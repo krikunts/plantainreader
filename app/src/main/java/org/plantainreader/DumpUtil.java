@@ -16,6 +16,7 @@ public class DumpUtil {
     public static final Locale locale = new Locale("ru", "RU");
     public static final TimeZone tz = TimeZone.getTimeZone("GMT+3");
     public static final DateFormat FULL_DT_FMT = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     public static Integer convertBytes(byte... b) {
         int result = 0;
@@ -28,13 +29,24 @@ public class DumpUtil {
         return result;
     }
 
-    public static String getHexString(byte[] b, String separator) {
-        StringBuilder result = new StringBuilder();
-        for (byte b2 : b) {
-            result.append(Integer.toString((b2 & 255) + 256, 16).substring(1).toUpperCase());
-            result.append(separator);
+    public static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for(int i = 0; i < bytes.length; i++) {
+            int v = bytes[i] & 0xFF;
+            hexChars[i * 2] = hexArray[v >>> 4];
+            hexChars[i * 2 + 1] = hexArray[v & 0x0F];
         }
-        return result.substring(0, result.length() - separator.length());
+        return new String(hexChars);
+    }
+
+    public static byte[] hexToBytes(String s) {
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i+1), 16));
+        }
+        return data;
     }
 
     public static String getRubles(byte... b) {
